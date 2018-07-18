@@ -7,24 +7,31 @@ const Map = ReactMapboxGl({
   accessToken: "pk.eyJ1IjoiYWJvdXRnZW8iLCJhIjoiY2pqcjgzYXl6M29wbjNxcm05MzZqMDJiYSJ9.nIS2lMRvW3KQto_CTt4PPA"
 });
 
+const EMPTY_GEOM = {
+  "type": "FeatureCollection",
+  "features": []
+}
+
 export default class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      places: {
-        "type": "FeatureCollection",
-        "features": []
-      }
+      places: EMPTY_GEOM,
+      routes: EMPTY_GEOM
     }
   }
 
   componentDidMount() {
     axios.get('data/places_new_structure.json')
       .then(result => {
-        console.log('foo');
         this.setState({ places: result.data });
-      })
+      });
+
+    axios.get('data/routes.json')
+      .then(result => {
+        this.setState({ routes: result.data });
+      });
   }
 
   render() {
@@ -42,6 +49,12 @@ export default class App extends Component {
               "circle-color": "#ff0000",
               "circle-opacity": 0.2,
               "circle-radius": 5
+            }}/>
+          <GeoJSONLayer
+            data={this.state.routes}
+            type
+            linePaint={{
+              "line-color": "#ff0000"
             }}/>
       </Map>
     )
