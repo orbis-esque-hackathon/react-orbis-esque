@@ -25,6 +25,7 @@ export default class App extends Component {
   componentDidMount() {
     axios.get('data/places_new_structure.json')
       .then(result => {
+        result.data.features.forEach(f => f.bind)
         this.setState({ places: result.data });
       });
 
@@ -32,6 +33,10 @@ export default class App extends Component {
       .then(result => {
         this.setState({ routes: result.data });
       });
+  }
+
+  onSelectPlace(e) {
+    console.log(e);
   }
 
   render() {
@@ -47,9 +52,10 @@ export default class App extends Component {
             type
             circlePaint={{
               "circle-color": "#ff0000",
-              "circle-opacity": 0.2,
-              "circle-radius": 5
-            }}/>
+              "circle-opacity": 0.9,
+              "circle-radius": 6
+            }}
+            circleOnClick={this.onSelectPlace.bind(this)} />
           <GeoJSONLayer
             data={this.state.routes}
             type
