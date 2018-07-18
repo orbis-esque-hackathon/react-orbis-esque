@@ -9,6 +9,7 @@
   },
   "author": "The Orbis-Esque-Hackathon Team",
   "dependencies": {
+    "axios": "0.18.0",
     "mapbox-gl": "0.47.0-beta.1",
     "react": "16.4.1",
     "react-dom": "16.4.1",
