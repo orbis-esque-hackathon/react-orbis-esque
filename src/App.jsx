@@ -36,7 +36,7 @@ export default class App extends Component {
   }
 
   onSelectPlace(e) {
-    console.log(e);
+    console.log(e.features);
   }
 
   render() {
