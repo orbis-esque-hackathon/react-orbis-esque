@@ -19,9 +19,10 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: EMPTY_GEOM,
-      routes: EMPTY_GEOM,
-      selected: null
+      places: EMPTY_GEOM, // Places data from GeoJSON
+      routes: EMPTY_GEOM, // Routes data from GeoJSON
+      selected: null,     // Mostly for testing: a feature selected via mouse
+      highlighted: null   // { routes: [], places: [] } to highlight (e.g. after a route calculation)
     }
   }
 
@@ -35,6 +36,11 @@ export default class App extends Component {
       .then(result => {
         this.setState({ routes: result.data });
       });
+
+    // TODO don't display all as one GeoJSON, but split up features
+    // individually, so we can highlight them through state.
+
+    // TODO highlight some routes randomly, for testing...
   }
 
   onSelectPlace(e) {
