@@ -144,3 +144,5 @@ var DijksGraph = (function (undefined) {
 	return Graph;
 
 })();
+
+export { DijksGraph };

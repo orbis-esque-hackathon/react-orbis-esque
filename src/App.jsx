@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import ReactMapboxGl, { Feature, GeoJSONLayer, Layer, Popup } from "react-mapbox-gl";
 import axios from 'axios';
 
-import './althurayya.js';
+const althurayya = require('./althurayya.js');
 import '../style/app.scss';
 
 const Map = ReactMapboxGl({
@@ -51,12 +51,12 @@ export default class App extends Component {
     const feature = (e.features.length > 0) ? e.features[0] : null;
 
     this.setState(previous => {
-      if (previous.highlighted.places.length === 1)
+      if (previous.highlighted.places.length === 1) {
+        althurayya.findPathConsideringIntermediates(previous.highlighted.places[0], feature)
         return { highlighted: { places: [ previous.highlighted.places[0], feature ] } };
-      else
+      } else
         return { highlighted: { places: [ feature ] } };
     });
-
   }
 
   render() {

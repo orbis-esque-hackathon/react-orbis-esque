@@ -6,7 +6,7 @@ var graph_dijks;
 
 
 // On click Find path
-function findPathConsideringIntermediates(start, end, stopInputsId) {
+var findPathConsideringIntermediates = function findPathConsideringIntermediates(start, end) {
     // stopInputsId = 'stopInput'
 
     // Add intermediate stops button
@@ -14,7 +14,7 @@ function findPathConsideringIntermediates(start, end, stopInputsId) {
 
     // ?? Do we need ?? Two check boxes (shortest vs optimal)
     // Optimal: Each segment in a day
-    var selections = selectedTypes('itinerary-options');
+    // var selections = selectedTypes('itinerary-options');
 
     //Clear the previous distance information to be ready for the new path
     // $("#dist_div").html("");
@@ -28,11 +28,14 @@ function findPathConsideringIntermediates(start, end, stopInputsId) {
     // var itinerary = makeItinerary (start, end, stopInputsId);
 
 // Find shortest and within a day paths for itinerary and return the distance values for each path
-    var distances = findItinerary(itinerary, selections);
+    // var distances = findItinerary(itinerary, selections);
+    // itinerary subsituted for [start, end]
+    var distances = findItinerary([start, end]);
 
-    // ?? What is the diff short and day distances? Relate to selections, do we need both?
+
+    // I'm only going to use short_distance for first iteration. Optimal is stoping one day
     var short_distance = distances[0];
-    var day_distance = distances[1];
+    // var day_distance = distances[1];
 
     // Calculate direct distance from source to destination
     // Do we need Euclidean distance??
@@ -59,21 +62,24 @@ function findItinerary(stops, selections) {
     for (var i = 0; i < stops.length - 1; i++) {
         s = stops[i];
         t = stops[i + 1];
-        if (selections.indexOf(itin_opts[0]) != -1) {
-            var short_path = findPath(s, t, itin_opts[0]);
+        // if (selections.indexOf(itin_opts[0]) != -1) {
+            var short_path = findPath(s, t, 'short');
 
             // Update colour of path on the map
             // short_distance += displayPathControl(short_path, "red");
-        }
+        // }
             //shortestPaths.push(findPath(s, t, "Shortest"));
-        if (selections.indexOf(itin_opts[1]) != -1){
-            var day_path = findPath(s, t, itin_opts[1]);
 
-            // Update colour of path on the map
-            // day_distance += displayPathControl(day_path, "green");
-        }
+        // Remove for day path
+        // if (selections.indexOf(itin_opts[1]) != -1){
+        //     var day_path = findPath(s, t, itin_opts[1]);
+        //
+        //     // Update colour of path on the map
+        //     // day_distance += displayPathControl(day_path, "green");
+        // }
     }
-    return [short_distance, day_distance]
+    // return [short_distance, day_distance]
+    return [short_distance, null]
 }
 
 function findPath (start, end, pathType) {
@@ -82,24 +88,28 @@ function findPath (start, end, pathType) {
     // Extract the cornu_URI from the search inputs for both source and destination
 
     // ?? Do we need to modify data??
-    var startUri = start.substring(start.lastIndexOf(",") + 1).trim();
-    var endUri = end.substring(end.lastIndexOf(",") + 1).trim();
+    start.properties.althurayyaData
+    // Original code doesn't work we need "URI":"JIYADSAGHIR_239E319N_S
+    // var startUri = start.properties.althurayyadata.substring(start.lastIndexOf(",") + 1).trim();
+    // var endUri = end.substring(end.lastIndexOf(",") + 1).trim();
+    var startUri = start.properties.althurayyaData.split('"')[3].trim();
+    var endUri = end.properties.althurayyaData.split('"')[3].trim();
 
-    // Only use one
-    // What is itin_opts ??
+    // Modified to only use shortest path
     // itin_opts[0] shortest path
-    if (pathType == itin_opts[0]) {
+    // if (pathType == itin_opts[0]) {
+    if (pathType == 'short') {
         shortPath = graph_dijks.findShortestPath(startUri, endUri);
         if (shortPath != null)
             return shortPath;
     }
 
     // itin_opts[1] is optimal
-    if (pathType == itin_opts[1]) {
-        dayPath = shortestPath(graph.getNode(startUri), graph.getNode(endUri), 'd');
-        if (dayPath != null)
-            return dayPath;
-    }
+    // if (pathType == itin_opts[1]) {
+    //     dayPath = shortestPath(graph.getNode(startUri), graph.getNode(endUri), 'd');
+    //     if (dayPath != null)
+    //         return dayPath;
+    // }
 }
 
 // Updates colours of paths on the map
@@ -132,7 +142,7 @@ function findPath (start, end, pathType) {
 // }
 
 //Calculate the direct distance from start to end
-// Euclidean distance to display at the bottom
+// Euclidean distance that displays at the bottom, we might not need this
 function calcDirectDistance (start, end) {
     var startUri = start.substring(start.lastIndexOf(",") + 1).trim();
     var endUri = end.substring(end.lastIndexOf(",") + 1).trim();
