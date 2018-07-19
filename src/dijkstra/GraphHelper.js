@@ -1,7 +1,7 @@
 export default class  GraphHelper {
 
   static buildGraph(features) {
-    const g = require('./Graph.js');
+    const d = require('./Dijkstra.js');
 
     const map = {};
 

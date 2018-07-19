@@ -76,8 +76,8 @@ export default class App extends Component {
 
   onMapMove(e) {
     this.setState({
-      zoom: [ e.transform._zoom ],
-      center: e.transform._center
+      zoom: [ e.transform._zoom ]
+      // center: e.transform._center
     })
   }
 
