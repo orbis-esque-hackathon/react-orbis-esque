@@ -1,8 +1,15 @@
+const g = require('./graph.js');
+const d = require('./dijkstra.js');
+const h = require('./handle_routes.js');
 
 var graph_dijks;
 
-// ?? init_graph(route_features);
-// graph_dijks = create_dijk_graph(route_features);
+var build_graph = function(features) {
+  features.forEach(h.handle_routes);
+  g.init_graph(route_features);
+}
+
+graph_dijks = create_dijk_graph(route_features);
 
 
 // On click Find path
