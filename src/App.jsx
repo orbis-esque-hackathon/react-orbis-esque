@@ -35,6 +35,17 @@ export default class App extends Component {
       });
   }
 
+  onMouseEnterPlace(e) {
+    // Not really nice, but does the job
+    const canvas = document.querySelector('.mapboxgl-canvas');
+    canvas.style.cursor = 'crosshair';
+  }
+
+  onMouseLeavePlace(e) {
+    const canvas = document.querySelector('.mapboxgl-canvas');
+    canvas.style.cursor = 'inherit';
+  }
+
   onSelectPlace(e) {
     const feature = (e.features.length > 0) ? e.features[0] : null;
 
@@ -49,6 +60,7 @@ export default class App extends Component {
   render() {
     return (
       <Map
+        ref={c => this._map = c}
         style="mapbox://styles/mapbox/streets-v9"
         center={[ 33, 35 ]}
         zoom={[4]}
@@ -62,10 +74,12 @@ export default class App extends Component {
             type="circle"
             circlePaint={{
               "circle-color": "red",
-              "circle-opacity": 0.9,
-              "circle-radius": 10
+              "circle-opacity": 0.8,
+              "circle-radius": 6
             }}
-            circleOnClick={this.onSelectPlace.bind(this)}/>
+            circleOnMouseEnter={this.onMouseEnterPlace.bind(this)}
+            circleOnMouseLeave={this.onMouseLeavePlace.bind(this)}
+            circleOnClick={this.onSelectPlace.bind(this)} />
 
           <Layer
             id="routes"
