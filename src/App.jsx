@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import ReactMapboxGl, { Feature, GeoJSONLayer, Layer, Popup } from "react-mapbox-gl";
 import axios from 'axios';
 
+import './althurayya.js';
 import '../style/app.scss';
 
 const Map = ReactMapboxGl({
@@ -55,6 +56,7 @@ export default class App extends Component {
       else
         return { highlighted: { places: [ feature ] } };
     });
+
   }
 
   render() {

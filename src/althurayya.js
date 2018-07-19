@@ -2,7 +2,7 @@
 var graph_dijks;
 
 // ?? init_graph(route_features);
-graph_dijks = create_dijk_graph(route_features);
+// graph_dijks = create_dijk_graph(route_features);
 
 
 // On click Find path
@@ -13,6 +13,7 @@ function findPathConsideringIntermediates(start, end, stopInputsId) {
     // var sizeOfInputs = numStops;
 
     // ?? Do we need ?? Two check boxes (shortest vs optimal)
+    // Optimal: Each segment in a day
     var selections = selectedTypes('itinerary-options');
 
     //Clear the previous distance information to be ready for the new path
@@ -34,6 +35,7 @@ function findPathConsideringIntermediates(start, end, stopInputsId) {
     var day_distance = distances[1];
 
     // Calculate direct distance from source to destination
+    // Do we need Euclidean distance??
     var int_direct_dist = calcDirectDistance(itinerary[0], itinerary[itinerary.length -1]);
 
     // Update the DOM colours
@@ -83,12 +85,16 @@ function findPath (start, end, pathType) {
     var startUri = start.substring(start.lastIndexOf(",") + 1).trim();
     var endUri = end.substring(end.lastIndexOf(",") + 1).trim();
 
+    // Only use one
+    // What is itin_opts ??
+    // itin_opts[0] shortest path
     if (pathType == itin_opts[0]) {
         shortPath = graph_dijks.findShortestPath(startUri, endUri);
         if (shortPath != null)
             return shortPath;
     }
 
+    // itin_opts[1] is optimal
     if (pathType == itin_opts[1]) {
         dayPath = shortestPath(graph.getNode(startUri), graph.getNode(endUri), 'd');
         if (dayPath != null)
@@ -126,6 +132,7 @@ function findPath (start, end, pathType) {
 // }
 
 //Calculate the direct distance from start to end
+// Euclidean distance to display at the bottom
 function calcDirectDistance (start, end) {
     var startUri = start.substring(start.lastIndexOf(",") + 1).trim();
     var endUri = end.substring(end.lastIndexOf(",") + 1).trim();
@@ -154,3 +161,5 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     }
     return dist;
 }
+
+export { findPathConsideringIntermediates };
