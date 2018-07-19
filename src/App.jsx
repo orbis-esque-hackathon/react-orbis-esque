@@ -14,7 +14,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: [],  // Places data from GeoJSON
+      places: { type: "FeatureCollection", features: [] },  // Places data from GeoJSON
       routes: [],  // Routes data from GeoJSON
       highlighted: { // Selected route (if any)
         places: [],
@@ -26,7 +26,7 @@ export default class App extends Component {
   componentDidMount() {
     axios.get('data/places_new_structure.json')
       .then(result => {
-        this.setState({ places: result.data.features });
+        this.setState({ places: result.data });
       });
 
     axios.get('data/routes.json')
@@ -35,18 +35,14 @@ export default class App extends Component {
       });
   }
 
-  onClick(e) {
-    console.log(e);
-  }
-
   onSelectPlace(e) {
     const feature = (e.features.length > 0) ? e.features[0] : null;
 
     this.setState(previous => {
-      if (previous.highlighted.places.length === 0) {
-        return { highlighted: { places: [ feature ] } };
-      } else {
+      if (previous.highlighted.places.length === 1) {
         return { highlighted: { places: [ previous.highlighted.places[0], feature ] } };
+      } else {
+        return { highlighted: { places: [ feature ] } };
       }
     });
   }
@@ -60,24 +56,18 @@ export default class App extends Component {
         containerStyle={{
           height: "100vh",
           width: "100vw"
-        }}
-        onClick={this.onClick.bind(this)}>
-          <Layer
+        }}>
+          <GeoJSONLayer
             id="places"
             key="places"
+            data={this.state.places}
             type="circle"
-            paint={{
+            circlePaint={{
               "circle-color": "red",
               "circle-opacity": 0.9,
               "circle-radius": 10
-            }}>
-            {this.state.places.map(feature =>
-              <Feature
-                key={feature.properties.id}
-                coordinates={feature.geometry.coordinates}
-                onClick={this.onSelectPlace.bind(this)} />
-            )}
-          </Layer>
+            }}
+            circleOnClick={this.onSelectPlace.bind(this)}/>
 
           <Layer
             id="routes"
@@ -116,7 +106,9 @@ export default class App extends Component {
               "circle-radius": 6
             }}>
             {this.state.highlighted.places.map(feature =>
-              <Feature coordinates={feature.geometry.coordinates} />
+              <Feature
+                key={`selected_${feature.properties.id}`}
+                coordinates={feature.geometry.coordinates} />
             )}
           </Layer>
       </Map>
