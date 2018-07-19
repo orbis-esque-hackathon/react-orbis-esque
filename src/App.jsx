@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
+import ReactMapboxGl, { GeoJSONLayer, Popup } from "react-mapbox-gl";
 import axios from 'axios';
 
 import '../style/app.scss';
@@ -20,14 +20,14 @@ export default class App extends Component {
     super(props);
     this.state = {
       places: EMPTY_GEOM,
-      routes: EMPTY_GEOM
+      routes: EMPTY_GEOM,
+      selected: null
     }
   }
 
   componentDidMount() {
     axios.get('data/places_new_structure.json')
       .then(result => {
-        result.data.features.forEach(f => f.bind)
         this.setState({ places: result.data });
       });
 
@@ -38,7 +38,14 @@ export default class App extends Component {
   }
 
   onSelectPlace(e) {
-    console.log(e.features);
+    const feature = (e.features.length > 0) ? e.features[0] : null;
+
+    this.setState({
+      selected: {
+        coordinates: [ e.lngLat.lng, e.lngLat.lat ]
+        // TODO meaningful popup from feature info
+      }
+    });
   }
 
   render() {
@@ -60,12 +67,20 @@ export default class App extends Component {
               "circle-radius": 6
             }}
             circleOnClick={this.onSelectPlace.bind(this)} />
+
           <GeoJSONLayer
             data={this.state.routes}
             type
             linePaint={{
               "line-color": "#ff0000"
             }}/>
+
+          {this.state.selected &&
+            <Popup
+              coordinates={this.state.selected.coordinates}>
+              <div>You are here</div>
+            </Popup>
+          }
       </Map>
     )
   }
