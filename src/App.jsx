@@ -14,10 +14,11 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      places: [],       // Places data from GeoJSON
-      routes: [],       // Routes data from GeoJSON
-      selected: null,   // Mostly for testing: a feature selected via mouse
-      highlighted: null // { routes: [], places: [] } to highlight (e.g. after a route calculation)
+      places: [],  // Places data from GeoJSON
+      routes: [],  // Routes data from GeoJSON
+      start: null, // Selected start point, if any
+      end: null,   // Selected end point, if any
+      segments: [] // Selected route segments, if any
     }
   }
 
@@ -31,19 +32,21 @@ export default class App extends Component {
       .then(result => {
         this.setState({ routes: result.data.features });
       });
-
-    // TODO highlight some routes randomly, for testing...
   }
 
   onSelectPlace(e) {
     const feature = (e.features.length > 0) ? e.features[0] : null;
 
-    this.setState({
-      selected: {
-        coordinates: [ e.lngLat.lng, e.lngLat.lat ]
-        // TODO meaningful popup from feature info
-      }
+    this.setState({ start: feature });
+    /*
+    this.setState(previous => {
+      if (previous.start && !previous.end) // Start set, but no end yet
+        return { end: feature };
+      else // Init new
+        return { start: feature, end: null, segments: [] };
     });
+
+    console.log(this.state);*/
   }
 
   render() {
@@ -58,13 +61,13 @@ export default class App extends Component {
         }}>
           <Layer
             id="places"
+            key="places"
             type="circle"
             paint={{
-              "circle-color": "#ff0000",
+              "circle-color": "red",
               "circle-opacity": 0.9,
               "circle-radius": 6
-            }}
-          >
+            }}>
             {this.state.places.map(feature =>
               <Feature
                 key={feature.properties.id}
@@ -75,6 +78,7 @@ export default class App extends Component {
 
           <Layer
             id="routes"
+            key="routes"
             type="line"
             paint={{
               "line-color": "#ff0000"
@@ -87,11 +91,29 @@ export default class App extends Component {
             )}
           </Layer>
 
-          {this.state.selected &&
-            <Popup
-              coordinates={this.state.selected.coordinates}>
-              <div>You are here</div>
-            </Popup>
+          <Layer
+            id="selected_path"
+            type="line"
+            paint={{ "line-color": "green" }}>
+            {this.state.segments.map(feature =>
+              <Feature
+                key={feature.properties.id}
+                coordinates={feature.geometry.coordinates} />
+            )}
+          </Layer>
+
+          {this.state.start &&
+            <Layer
+              id="selected_places"
+              type="circle"
+              paint={{ "circle-color": "blue" }}>
+
+              <Feature coordinates={this.state.start.geometry.coordinates} />
+
+              {this.state.end &&
+                <Feature coordinates={this.state.end.geometry.coordinates} />
+              }
+            </Layer>
           }
       </Map>
     )
