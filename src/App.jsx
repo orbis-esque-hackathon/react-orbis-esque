@@ -45,6 +45,8 @@ export default class App extends Component {
     return (
       <Map
         style="mapbox://styles/mapbox/streets-v9"
+        center={[ 33, 35 ]}
+        zoom={[4]}
         containerStyle={{
           height: "100vh",
           width: "100vw"
