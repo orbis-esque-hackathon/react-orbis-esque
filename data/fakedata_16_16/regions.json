@@ -1,0 +1,14 @@
+{
+  "REGION_A": {
+    "region_code": "RegionA",
+    "color": "hsl(0,100%,50%)",
+    "display": "Region A",
+    "visual_center": "ID_5_8"
+  },
+  "REGION_B": {
+    "region_code": "RegionB",
+    "color": "hsl(223,100%,50%)",
+    "display": "Region B",
+    "visual_center": "ID_15_8"
+  }
+}

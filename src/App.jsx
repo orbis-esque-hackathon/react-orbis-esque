@@ -29,12 +29,12 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('data/places_new_structure.json')
+    axios.get('data/fakedata_16_16/places_new_structure.geojson')
       .then(result => {
         this.setState({ places: result.data });
       });
 
-    axios.get('data/routes.json')
+    axios.get('data/fakedata_16_16/routes.json')
       .then(result => {
         const features = result.data.features;
         this._graph = GraphHelper.buildGraph(features);

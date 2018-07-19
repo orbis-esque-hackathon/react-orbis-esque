@@ -1,0 +1,56 @@
+{
+  "REGION_A": {
+    "region_code": "RegionA",
+    "color": "hsl(0,100%,50%)",
+    "display": "Region A",
+    "visual_center": "ID_5_40"
+  },
+  "REGION_B": {
+    "region_code": "RegionB",
+    "color": "hsl(212,100%,50%)",
+    "display": "Region B",
+    "visual_center": "ID_15_40"
+  },
+  "REGION_C": {
+    "region_code": "RegionC",
+    "color": "hsl(64,100%,50%)",
+    "display": "Region C",
+    "visual_center": "ID_25_40"
+  },
+  "REGION_D": {
+    "region_code": "RegionD",
+    "color": "hsl(276,100%,50%)",
+    "display": "Region D",
+    "visual_center": "ID_35_40"
+  },
+  "REGION_E": {
+    "region_code": "RegionE",
+    "color": "hsl(128,100%,50%)",
+    "display": "Region E",
+    "visual_center": "ID_45_40"
+  },
+  "REGION_F": {
+    "region_code": "RegionF",
+    "color": "hsl(340,100%,50%)",
+    "display": "Region F",
+    "visual_center": "ID_55_40"
+  },
+  "REGION_G": {
+    "region_code": "RegionG",
+    "color": "hsl(192,100%,50%)",
+    "display": "Region G",
+    "visual_center": "ID_65_40"
+  },
+  "REGION_H": {
+    "region_code": "RegionH",
+    "color": "hsl(44,100%,50%)",
+    "display": "Region H",
+    "visual_center": "ID_75_40"
+  },
+  "REGION_I": {
+    "region_code": "RegionI",
+    "color": "hsl(256,100%,50%)",
+    "display": "Region I",
+    "visual_center": "ID_85_40"
+  }
+}
