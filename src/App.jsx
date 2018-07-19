@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import ReactMapboxGl, { GeoJSONLayer } from "react-mapbox-gl";
 import axios from 'axios';
 
+import '../style/app.scss';
+
 const Map = ReactMapboxGl({
   accessToken: "pk.eyJ1IjoiYWJvdXRnZW8iLCJhIjoiY2pqcjgzYXl6M29wbjNxcm05MzZqMDJiYSJ9.nIS2lMRvW3KQto_CTt4PPA"
 });
