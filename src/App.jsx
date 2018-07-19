@@ -98,10 +98,10 @@ export default class App extends Component {
             <Layer
               id="selected_path"
               type="line"
-              paint={{ "line-color": "green" }}>
+              paint={{ "line-color": "blue" }}>
               {this.state.highlighted.segments.map(feature =>
                 <Feature
-                  key={feature.properties.id}
+                  key={`selected_${feature.properties.id}`
                   coordinates={feature.geometry.coordinates} />
               )}
             </Layer>
