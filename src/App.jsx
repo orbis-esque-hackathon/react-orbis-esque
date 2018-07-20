@@ -6,26 +6,21 @@ import axios from 'axios';
 import { MAPBOX_API_KEY } from './Constants.js'
 import GraphHelper from './routing/GraphHelper.js'
 
-// const althurayya = require('./althurayya.js');
 import '../style/app.scss';
 
-console.log(MAPBOX_API_KEY);
-
-const Map = ReactMapboxGl({
-  accessToken: MAPBOX_API_KEY
-});
+const Map = ReactMapboxGl({ accessToken: MAPBOX_API_KEY });
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      zoom: [4],
-      center: [33, 35],
-      places: { type: "FeatureCollection", features: [] },  // Places data from GeoJSON
-      routes: [],  // Routes data from GeoJSON
-      highlighted: { // Selected route (if any)
-        places: [],
+      zoom:   [4], // map zoom
+      places: { type: "FeatureCollection", features: [] }, // Places GeoJSON
+      routes: [],    // Route features array from routes GeoJSON
+      highlighted: { // Selected route (if any) - places & route segments
+        places:   [],
         segments: []
       }
     }
@@ -45,7 +40,8 @@ export default class App extends Component {
       });
   }
 
-  pickSegment(from, to) {
+  /** Helper to find the segment for a given start/end place pair **/
+  findSegment(from, to) {
     return this.state.routes.find(segment => {
       const s = segment.properties.sToponym;
       const e = segment.properties.eToponym;
@@ -70,7 +66,7 @@ export default class App extends Component {
       // Sliding window across path, pairwise
       const segments = [];
       for (var i=1; i<path.length; i++) {
-        segments.push(this.pickSegment(path[i - 1], path[i]));
+        segments.push(this.findSegment(path[i - 1], path[i]));
       }
 
       return segments;
@@ -80,7 +76,6 @@ export default class App extends Component {
   onMapMove(e) {
     this.setState({
       zoom: [ e.transform._zoom ]
-      // center: e.transform._center
     })
   }
 
@@ -103,8 +98,8 @@ export default class App extends Component {
         const start = previous.highlighted.places[0];
         const end = feature;
 
-        // althurayya.findPathConsideringIntermediates(previous.highlighted.places[0], feature)
         const segments = this.calculateRoute(start, end);
+
         if (segments)
           return { highlighted: { places: [ start, end ], segments: segments } };
         else
