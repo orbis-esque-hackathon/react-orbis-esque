@@ -79,4 +79,5 @@ node.js v4.2.6 and npm v6.1.0.)
 - This demo is actually using the wrong routing algorithm (from [dijkstra.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/dijkstra.js)
 in the original codebase). Use the correct one from [graph.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/graph.js)
 instead.
+- Add a popup to the demo so that we can at least show a minimum of place info.
 - ...
