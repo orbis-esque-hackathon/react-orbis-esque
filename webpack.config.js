@@ -20,6 +20,9 @@ module.exports = {
         env: {
           development: {
             presets: ['react-hmre']
+          },
+          production: {
+            presets: ['react']
           }
         }
       }
