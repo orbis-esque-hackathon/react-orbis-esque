@@ -131,6 +131,12 @@ export default class App extends Component {
           width: "100vw"
         }}>
           <GeoJSONLayer
+            id="routes"
+            data={this.state.routes}
+            type="line"
+            linePaint={LINE_STYLE} />
+
+          <GeoJSONLayer
             id="places"
             data={this.state.places}
             type="circle"
@@ -138,12 +144,6 @@ export default class App extends Component {
             circleOnMouseEnter={this.onMouseEnterPlace.bind(this)}
             circleOnMouseLeave={this.onMouseLeavePlace.bind(this)}
             circleOnClick={this.onSelectPlace.bind(this)} />
-
-          <GeoJSONLayer
-            id="routes"
-            data={this.state.routes}
-            type="line"
-            linePaint={LINE_STYLE} />
 
           <MapPath
             places={this.state.highlighted.places}
