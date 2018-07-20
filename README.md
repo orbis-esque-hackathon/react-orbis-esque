@@ -80,4 +80,7 @@ node.js v4.2.6 and npm v6.1.0.)
 in the original codebase). Use the correct one from [graph.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/graph.js)
 instead.
 - Add a popup to the demo so that we can at least show a minimum of place info.
+- Route display: right now, all segments are displayed as separate features, which
+  means the line will look "broken" in some cases. Merge the segments into a single
+  linestring (which will then display nicely).
 - ...
