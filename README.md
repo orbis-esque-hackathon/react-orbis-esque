@@ -8,7 +8,7 @@ routing component from the codebase of [al-Ṯurayyā](https://orbis-esque-hacka
 
 ## Live Demo
 
---  TODO --
+A live demo is available at [https://orbis-esque-hackathon.github.io/react-orbis-esque/](https://orbis-esque-hackathon.github.io/react-orbis-esque/)
 
 ## Using the React component
 
