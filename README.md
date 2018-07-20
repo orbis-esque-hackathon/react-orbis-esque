@@ -27,3 +27,16 @@ node.js v4.2.6 and npm v6.1.0.)
   and add your own Mapbox API key
 - Run `npm install` to install project dependencies
 - Run `npm start` and go to [http://localhost:7171](http://localhost:7171)
+
+## Potential ideas for the future...
+
+...for whoever wants to play with it:
+
+- Encapsulate just the routing functionality and the path drawing component,
+  so that routing can be used alone; and different drawing components can be
+  created for Mapbox, Leaflet, etc.
+- Support the weight modifiers model developed as part of the hackathon.
+- This demo is actually using the wrong routing algorithm (from [dijkstra.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/dijkstra.js)
+in the original codebase). Use the correct one from [graph.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/graph.js)
+instead.
+- ...
