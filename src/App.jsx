@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import ReactMapboxGl, { Feature, GeoJSONLayer, Layer, Popup } from 'react-mapbox-gl';
 import axios from 'axios';
 
-import GraphHelper from './dijkstra/GraphHelper.js'
+import GraphHelper from './routing/GraphHelper.js'
 
 // const althurayya = require('./althurayya.js');
 import '../style/app.scss';
