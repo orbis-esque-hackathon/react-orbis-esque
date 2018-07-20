@@ -13,7 +13,7 @@ Click a place to select a start for the route, and another to select the end.
 Note that not all places are connected to the road network, so you might not always
 get a route.
 
-## How it works
+## How to use
 
 The current integration is for use with [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl).
 
