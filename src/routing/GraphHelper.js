@@ -14,6 +14,7 @@ export default class  GraphHelper {
     features.forEach(f => {
       const p = f.properties; // Shorthand
       addIfNotExists(map, p.sToponym, p.eToponym, p.Meter);
+      addIfNotExists(map, p.eToponym, p.sToponym, p.Meter);
     });
 
     return new Graph(map);
