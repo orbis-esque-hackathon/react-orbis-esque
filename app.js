@@ -74,9 +74,9 @@
 	
 	var _GraphHelper2 = _interopRequireDefault(_GraphHelper);
 	
-	var _MapPath = __webpack_require__(91);
+	var _MapboxPath = __webpack_require__(91);
 	
-	var _MapPath2 = _interopRequireDefault(_MapPath);
+	var _MapboxPath2 = _interopRequireDefault(_MapboxPath);
 	
 	__webpack_require__(92);
 	
@@ -240,7 +240,7 @@
 	          circleOnMouseEnter: this.onMouseEnterPlace.bind(this),
 	          circleOnMouseLeave: this.onMouseLeavePlace.bind(this),
 	          circleOnClick: this.onSelectPlace.bind(this) }),
-	        _react2.default.createElement(_MapPath2.default, {
+	        _react2.default.createElement(_MapboxPath2.default, {
 	          places: this.state.highlighted.places,
 	          segments: this.state.highlighted.segments })
 	      );
@@ -27379,16 +27379,40 @@
 	 * A MapPath is a visual feature made up of a start and end location and
 	 * a list of line segments in between.
 	 */
-	var MapPath = function (_Component) {
-	  _inherits(MapPath, _Component);
+	var MapboxPath = function (_Component) {
+	  _inherits(MapboxPath, _Component);
 	
-	  function MapPath() {
-	    _classCallCheck(this, MapPath);
+	  function MapboxPath(props) {
+	    _classCallCheck(this, MapboxPath);
 	
-	    return _possibleConstructorReturn(this, (MapPath.__proto__ || Object.getPrototypeOf(MapPath)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (MapboxPath.__proto__ || Object.getPrototypeOf(MapboxPath)).call(this, props));
+	
+	    _this.state = { selected: null };
+	    _this.setPopupState(props);
+	    return _this;
 	  }
 	
-	  _createClass(MapPath, [{
+	  _createClass(MapboxPath, [{
+	    key: 'setPopupState',
+	    value: function setPopupState(props) {
+	      if (props.places.length > 0) {
+	        this.setState({
+	          selected: props.places[props.places.length - 1]
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'getName',
+	    value: function getName(feature) {
+	      var payload = JSON.parse(feature.properties.althurayyaData);
+	      return payload.names.eng.translit;
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setPopupState(nextProps);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -27424,15 +27448,26 @@
 	              key: 'selected_' + feature.properties.id,
 	              coordinates: feature.geometry.coordinates });
 	          })
+	        ),
+	        this.state.selected && _react2.default.createElement(
+	          _reactMapboxGl.Popup,
+	          {
+	            className: 'popup',
+	            coordinates: this.state.selected.geometry.coordinates },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            this.getName(this.state.selected)
+	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return MapPath;
+	  return MapboxPath;
 	}(_react.Component);
 	
-	exports.default = MapPath;
+	exports.default = MapboxPath;
 
 /***/ },
 /* 92 */
@@ -27493,7 +27528,7 @@
 	
 	
 	// module
-	exports.push([module.id, "html, body {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n\n#app {\n  width: 100%;\n  height: 100%; }\n", ""]);
+	exports.push([module.id, "html, body {\n  margin: 0;\n  padding: 0;\n  width: 100%;\n  height: 100%; }\n\n#app {\n  width: 100%;\n  height: 100%; }\n  #app .popup h1 {\n    margin: 0;\n    padding: 5px 10px 5px 5px;\n    font-weight: normal;\n    font-size: 24px; }\n", ""]);
 	
 	// exports
 
