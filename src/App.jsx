@@ -3,13 +3,16 @@ import { render } from 'react-dom';
 import ReactMapboxGl, { Feature, GeoJSONLayer, Layer, Popup } from 'react-mapbox-gl';
 import axios from 'axios';
 
+import { MAPBOX_API_KEY } from './Constants.js'
 import GraphHelper from './routing/GraphHelper.js'
 
 // const althurayya = require('./althurayya.js');
 import '../style/app.scss';
 
+console.log(MAPBOX_API_KEY);
+
 const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiYWJvdXRnZW8iLCJhIjoiY2pqcjgzYXl6M29wbjNxcm05MzZqMDJiYSJ9.nIS2lMRvW3KQto_CTt4PPA"
+  accessToken: MAPBOX_API_KEY
 });
 
 export default class App extends Component {
@@ -127,9 +130,12 @@ export default class App extends Component {
             data={this.state.places}
             type="circle"
             circlePaint={{
-              "circle-color": "red",
+              "circle-color": "#ff7f0e",
+              "circle-stroke-width": 2,
+              "circle-stroke-color": "#ff7f0e",
               "circle-opacity": 0.8,
-              "circle-radius": 6
+              "circle-stroke-opacity": 1,
+              "circle-radius": 4
             }}
             circleOnMouseEnter={this.onMouseEnterPlace.bind(this)}
             circleOnMouseLeave={this.onMouseLeavePlace.bind(this)}
@@ -139,7 +145,8 @@ export default class App extends Component {
             id="routes"
             type="line"
             paint={{
-              "line-color": "#ff0000"
+              "line-color": "#ff7f0e",
+              "line-width": 2
             }}>
             {this.state.routes.map(feature =>
               <Feature
@@ -153,8 +160,8 @@ export default class App extends Component {
               id="selected_path"
               type="line"
               paint={{
-                "line-color": "blue",
-                "line-width": 4
+                "line-color": "#2ca02c",
+                "line-width": 6
               }}>
               {this.state.highlighted.segments.map(feature =>
                 <Feature
@@ -168,9 +175,9 @@ export default class App extends Component {
             id="selected_places"
             type="circle"
             paint={{
-              "circle-color": "blue",
+              "circle-color": "#2ca02c",
               "circle-opacity": 0.9,
-              "circle-radius": 6
+              "circle-radius": 8
             }}>
             {this.state.highlighted.places.map(feature =>
               <Feature
