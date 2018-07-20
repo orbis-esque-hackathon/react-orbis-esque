@@ -47,6 +47,6 @@ export const CIRCLE_STYLE = {
 }
 
 export const LINE_STYLE = {
-  'line-color': '#ff7f0e',
+  'line-color': '#939393',
   'line-width': 2
 }
