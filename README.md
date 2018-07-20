@@ -8,9 +8,11 @@ routing component from the codebase of [al-Ṯurayyā](https://orbis-esque-hacka
 
 ## Live Demo
 
---  TOOD --
+--  TODO --
 
 ## Using the React component
+
+--  TODO --
 
 ## Hacking on the code
 
