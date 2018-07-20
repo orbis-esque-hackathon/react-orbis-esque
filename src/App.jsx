@@ -7,7 +7,7 @@ import { MAPBOX_API_KEY } from './conf/constants.js';
 import { CIRCLE_STYLE, LINE_STYLE } from './conf/styles.js'
 
 import GraphHelper from './routing/GraphHelper.js';
-import MapPath from './MapPath.jsx';
+import MapboxPath from './MapboxPath.jsx';
 
 import '../style/app.scss';
 
@@ -147,7 +147,7 @@ export default class App extends Component {
             circleOnMouseLeave={this.onMouseLeavePlace.bind(this)}
             circleOnClick={this.onSelectPlace.bind(this)} />
 
-          <MapPath
+          <MapboxPath
             places={this.state.highlighted.places}
             segments={this.state.highlighted.segments} />
       </Map>
