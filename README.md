@@ -16,11 +16,7 @@ get a route.
 ## How to use
 
 The current integration is for use with [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl).
-
-Data for places and route segments must follow the example from al-Ṯurayyā. See
-sample files in the `data` folder.
-
-The `GraphHelper` holds routing code. Initialize it from the GeoJSON routes
+Data for places and route segments must follow the example from al-Ṯurayyā. See sample files in the `data` folder. The `GraphHelper` holds routing code. Initialize it from the GeoJSON routes
 file.
 
 ```js
