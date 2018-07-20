@@ -16,8 +16,10 @@ get a route.
 ## How to use
 
 The current integration is for use with [react-mapbox-gl](https://github.com/alex3165/react-mapbox-gl).
-Data for places and route segments must follow the example from al-Ṯurayyā. See sample files in the `data` folder. The `GraphHelper` holds routing code. Initialize it from the GeoJSON routes
-file.
+Data for places and route segments must follow the example from al-Ṯurayyā. See sample files in the `data` folder.
+
+The `GraphHelper` holds routing code. Use it to initialize the graph from the
+GeoJSON routes file.
 
 ```js
 import GraphHelper from './routing/GraphHelper.js';
@@ -27,8 +29,10 @@ import MapPath from './MapPath.jsx';
 
 axios.get('data/routes.json')
   .then(result => {
-    // Loads the data from the routes file and builds the graph
+    // Loads the routes file and builds the routing graph data structure
     this._graph = GraphHelper.buildGraph(result.data.features);
+
+    // Updates the state of the map, so that routes GeoJSON is rendered
     this.setState({ routes: result.data });
   });
 ```
