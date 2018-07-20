@@ -37,9 +37,9 @@ axios.get('data/routes.json')
   });
 ```
 
-The `MapPath` components handles the drawing. Add it as a child of the
-Map component. `places` is the array of start and end features, `segments`
-is an array of linestring features.
+The `MapPath` components handles the drawing of the route once it is calculated.
+Add it as a child of the Map component. `places` is the array of start and end
+features, `segments` is an array of linestring features.
 
 ```js
 <Map
