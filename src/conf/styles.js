@@ -29,7 +29,9 @@ export const CIRCLE_STYLE = {
     'Yaman_RE', '#8F3247',
     '#d3d3d3'
   ],
-  'circle-opacity': 1,
+  'circle-opacity': {
+    stops: [[2, 0.1], [6, 1]]
+  },
   'circle-radius': [
     'match',
     ['get', 'top_type', [ 'get', 'althurayyaData' ]],
@@ -48,5 +50,8 @@ export const CIRCLE_STYLE = {
 
 export const LINE_STYLE = {
   'line-color': '#939393',
-  'line-width': 2
+  'line-width': 2,
+  'line-opacity': {
+    stops: [[3, 0.4], [7, 1]]
+  }
 }

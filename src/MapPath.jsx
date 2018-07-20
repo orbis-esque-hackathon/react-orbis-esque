@@ -15,8 +15,8 @@ export default class MapPath extends Component {
             id="selected_path"
             type="line"
             paint={{
-              "line-color": "#2ca02c",
-              "line-width": 6
+              "line-color": "#d62728",
+              "line-width": 7
             }}>
             {this.props.segments.map(feature =>
               <Feature
@@ -30,8 +30,8 @@ export default class MapPath extends Component {
           id="selected_places"
           type="circle"
           paint={{
-            "circle-color": "#2ca02c",
-            "circle-opacity": 0.9,
+            "circle-color": "#d62728",
+            "circle-opacity": 1,
             "circle-radius": 8
           }}>
           {this.props.places.map(feature =>
