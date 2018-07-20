@@ -22,6 +22,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       zoom:   [4], // map zoom
+      center: [30, 33],
       places: EMPTY_GEOM, // Places GeoJSON
       routes: EMPTY_GEOM, // Routes GeoJSON
       highlighted: { // Selected route (if any) - places & route segments
@@ -125,6 +126,7 @@ export default class App extends Component {
       <Map
         style="mapbox://styles/mapbox/streets-v9"
         zoom={this.state.zoom}
+        center={this.state.center}
         onMoveEnd={this.onMapMove.bind(this)}
         containerStyle={{
           height: "100vh",
