@@ -8,10 +8,10 @@ routing component from the codebase of [al-Ṯurayyā](https://orbis-esque-hacka
 
 ## Live Demo
 
-A live demo is available at [https://orbis-esque-hackathon.github.io/react-orbis-esque/](https://orbis-esque-hackathon.github.io/react-orbis-esque/).
-(Click a place to select a start for the route, and another to select the end.
+__A live demo is available at [https://orbis-esque-hackathon.github.io/react-orbis-esque/](https://orbis-esque-hackathon.github.io/react-orbis-esque/)__.
+Click a place to select a start for the route, and another to select the end.
 Note that not all places are connected to the road network, so might not always
-get a route!)
+get a route!
 
 ## Using the React component
 
