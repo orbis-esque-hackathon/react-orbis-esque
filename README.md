@@ -1,5 +1,7 @@
 # react-orbis-esque
 
+![Screenshot](screenshot.jpg)
+
 An attempt at extracting some useful React components from Al-Thurayya
 
 - Create a copy of `Constants.TEMPLATE.js` named `Constants.js` and add your Mapbox API key
