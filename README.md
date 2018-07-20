@@ -37,7 +37,7 @@ axios.get('data/routes.json')
   });
 ```
 
-The `MapPath` components handles the drawing of the route once it is calculated.
+The `MapboxPath` components handles the drawing of the route on a Mapbox.gl map.
 Add it as a child of the Map component. `places` is the array of start and end
 features, `segments` is an array of linestring features.
 
@@ -51,7 +51,7 @@ features, `segments` is an array of linestring features.
 
   ...
 
-  <MapPath
+  <MapboxPath
     places={this.state.highlighted.places}
     segments={this.state.highlighted.segments} />
 </Map>
@@ -79,7 +79,7 @@ node.js v4.2.6 and npm v6.1.0.)
 - This demo is actually using the wrong routing algorithm (from [dijkstra.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/dijkstra.js)
 in the original codebase). Use the correct one from [graph.js](https://github.com/orbis-esque-hackathon/orbis-esque-hackathon.github.io/blob/master/althurayya/graph.js)
 instead.
-- Add a popup to the demo so that we can at least show a minimum of place info.
+- ~~Add a popup to the demo so that we can at least show a minimum of place info.~~ __DONE__
 - Route display: right now, all segments are displayed as separate features, which
   means the line will look "broken" in some cases. Merge the segments into a single
   linestring (which will then display nicely).
