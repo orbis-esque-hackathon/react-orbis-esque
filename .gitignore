@@ -1,4 +1,4 @@
 node_modules
 package-lock.json
 .DS_store
-Constants.js
+constants.js
