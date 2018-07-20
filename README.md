@@ -54,7 +54,6 @@ features, `segments` is an array of linestring features.
   <MapPath
     places={this.state.highlighted.places}
     segments={this.state.highlighted.segments} />
-
 </Map>
 ```
 
