@@ -119,12 +119,12 @@ export default class App extends Component {
     });
   }
 
-  // Popup
+  // style="mapbox://styles/mapbox/streets-v9"
 
   render() {
     return (
       <Map
-        style="mapbox://styles/mapbox/streets-v9"
+        style="https://klokantech.github.io/roman-empire/style.json"
         zoom={this.state.zoom}
         center={this.state.center}
         onMoveEnd={this.onMapMove.bind(this)}

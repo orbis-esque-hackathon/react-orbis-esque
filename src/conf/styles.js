@@ -32,6 +32,9 @@ export const CIRCLE_STYLE = {
   'circle-opacity': {
     stops: [[2, 0.1], [6, 1]]
   },
+  'circle-blur': {
+    stops: [[2, 2], [6, 0]]
+  },
   'circle-radius': [
     'match',
     ['get', 'top_type', [ 'get', 'althurayyaData' ]],
